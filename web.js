@@ -3,8 +3,7 @@ window.onload = function() {
         let area1 = document.getElementById('area1');
         let bakgrunn = false;
 
-
-            // Endre bakgrunnsfarge med fargevelger
+          // Endre bakgrunnsfarge med fargevelger
         document.getElementById('background-color').addEventListener("change",
             function() {
                 document.body.style.backgroundColor = document.getElementById("background-color").value;
