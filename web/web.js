@@ -20,7 +20,7 @@ window.onload = function () {
                     document.body.style.backgroundColor = "";
                     document.body.className = "lyseBlaa";
                     bakgrunn = true;
-                    document.getElementById("knapp").innerHTML="Tilbakestill farge";
+                    document.getElementById("knapp").innerHTML="Tilbakestill bakgrunn";
                 }
 
             } else {
@@ -29,6 +29,7 @@ window.onload = function () {
                     document.body.style.backgroundColor = "";
                     document.body.className = "";
                     bakgrunn = false;
+                    document.getElementById("knapp").innerHTML="Blå bakgrunn";
                 }
 
             }
