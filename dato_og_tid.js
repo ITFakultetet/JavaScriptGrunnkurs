@@ -1,17 +1,23 @@
 // Eksempler på Dato og tid med JavaScript
 
 const d = new Date();
-console.log("I dag er det den "+d.getDay()+". dagen  i uka"); 
-console.log("Måneden er: "+(d.getMonth()+1);
+console.log("I dag er det den "+(d.getDay()+1)+". dagen  i uka"); 
+console.log("Måneden er: "+(d.getMonth()+1));
 
 
 // Måling av tid
 let start = Date.now(); // millisekunder fra midnatt 1. Jan 1970
 
 // Gjør noe
-for (let i = 0; i < 1000000; i++) {
-  let doSomething = i * i * i;
+let doSomething = 0;
+for (let i = 0; i < 10000000; i++) {
+     doSomething += i * i ;
 }
+console.log(doSomething);
+
+setTimeout(() => {
+ console.log("Hei, etter 2 sekunder"); 
+}, 2000);
 
 let end = Date.now(); // Tiden etter at løkken er gjennomført
 
