@@ -2,9 +2,11 @@
 
 let  tell = (function () {
     let counter = 0;
-    return function () {counter += 1; return counter}
+    return function () {counter++; return counter}
   })();
 
+console.log(tell());
+console.log(tell());
 console.log(tell());
 console.log(tell());
 console.log(tell());
