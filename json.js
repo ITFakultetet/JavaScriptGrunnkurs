@@ -1,5 +1,4 @@
-const person =
-{
+const person = {
     "fornavn": "Ola",
     "etternavn": "Nordmann",
     "alder": 25,
