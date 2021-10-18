@@ -5,9 +5,16 @@ window.onload = function () {
     tittel.style.backgroundColor = "navy";
     tittel.style.color = "white";
     tittel.style.padding = "10px";
-    tittel.style.textAlign = ""
+    tittel.style.textAlign = "";
 
-    document.querySelector("h3+p").style.backgroundColor = "silver";
+    let avsnitt1 = document.querySelector("#seksjon2>h3+p")
+
+    avsnitt1.classList.add("silver");
+
+    const parentElement = document.querySelector('#article>section');
+    let allChildren = parentElement.querySelectorAll(":scope > p");
+    allChildren.forEach(item => item.classList.add("silver"));
+  
 
     // create a new div element
     const newDiv = document.createElement("div");
