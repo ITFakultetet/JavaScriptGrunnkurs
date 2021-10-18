@@ -1,3 +1,4 @@
+window.onload = function () {
 video = document.getElementById("video");
 
 function startVideo() {
@@ -11,3 +12,4 @@ function startVideo() {
 }
 
 startVideo();
+}
