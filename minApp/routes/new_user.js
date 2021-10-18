@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
     const dato = req.body.dato;
 
     const MongoClient = require('mongodb').MongoClient;
-    const uri = "mongodb://kurs:kurs123@noderia.com/kurs?retryWrites=true&w=majority";
+    const uri = "mongodb://noderia.com/kurs?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true });
 
     client.connect(err => {
