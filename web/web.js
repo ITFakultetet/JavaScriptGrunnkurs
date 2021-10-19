@@ -53,7 +53,6 @@ window.onload = function () {
             let bilde = document.getElementById('bilde1');
             bilde.style.border = "solid 10px red";
             bilde.style.margin = "auto";
-
             if (visBilde == false) {
                 knapp3.innerHTML = "Skjul bilde";
                 bildeBox.style.visibility = "visible";

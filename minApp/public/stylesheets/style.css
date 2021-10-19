@@ -9,11 +9,15 @@ a {
 
 td {
     padding: 5px;
-    background-color: #eee;
 }
 
+tr {
+   background-color: #efefef;
+}
+
+
 tr:nth-child(even) {
-    background-color: #efefef;
+    background-color: #dfdfdf;
 }
 
 th {
