@@ -4,7 +4,7 @@
 
 const fetch = require('node-fetch');
 
-fetch('https://itfakultetet.no/dogs.json')
+fetch('https://web.itfakultetet.no/dogs.json')
 .then(data => data.json())
 .then(json => {
 console.log("Struktur:\n");

@@ -171,8 +171,7 @@ window.onload = function () {
                 '<input type="text" id="brregsok" placeholder="Søk etter navn eller orgnr">' +
                 ' <button id="send">Søk</button>';
                 document.getElementById("brregsok").focus();
-            //  area2.style.height = "1000px"; 
-            document.getElementById("send").addEventListener("click",
+                document.getElementById("send").addEventListener("click",
                 function () {
                     let query = "https://hotell.difi.no/api/json/brreg/enhetsregisteret?query=" + document.getElementById("brregsok").value;
                     console.log(query);
