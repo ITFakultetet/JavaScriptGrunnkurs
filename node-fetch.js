@@ -7,6 +7,7 @@ const fetch = require('node-fetch');
 fetch('https://web.itfakultetet.no/dogs.json')
 .then(data => data.json())
 .then(json => {
+
 console.log("Struktur:\n");
 
   console.log(json.dogs);
@@ -14,7 +15,7 @@ console.log("Struktur:\n");
 console.log("\nBla gjennom med forEach:\n");
 
 json.dogs.forEach(hund => {
-  console.log("Navn:",hund.navn,"- Alder:",hund.alder);  
+  console.log("Navn:",hund.navn,"- Alder:",hund.alder,"år.");  
 });
 
 }) 
