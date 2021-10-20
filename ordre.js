@@ -11,7 +11,7 @@ let output = fs.readFileSync('ordre.txt','utf8')
     antall: felt[2],
     pris:felt[3]
     })
-return kunder
+return kunder;
 }, {});
 
 
