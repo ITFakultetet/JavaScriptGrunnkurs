@@ -3,7 +3,7 @@ window.onload = function () {
     div2.innerHTML = "";
     div1.innerHTML = '<label for="sokefelt">Søk i enhetsregisteret</label> ' +
         '<input type="text" id="sokefelt" placeholder="Søk etter navn eller orgnummer">' +
-        ' <button id="send">Søk</button>';
+        ' <button id="send" class="btn btn-success">Søk</button>';
     document.getElementById("sokefelt").focus();
 
     document.getElementById("sokefelt").addEventListener("keyup", function (event) {
