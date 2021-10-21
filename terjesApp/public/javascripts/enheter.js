@@ -6,17 +6,20 @@ window.onload = function () {
         ' <button id="send">Søk</button>';
     document.getElementById("sokefelt").focus();
 
-
-    document.getElementById("sokefelt").addEventListener("keyup", function(event) {
+    document.getElementById("sokefelt").addEventListener("keyup", function (event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-          // Cancel the default action, if needed
-          event.preventDefault();
-          // Trigger the button element with a click
-          document.getElementById("send").click();
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            if (document.getElementById("sokefelt").value == "") {
+                alert("Tast inn firmanavn eller orgnummer")
+                document.getElementById("sokefelt").focus();
+            } else {
+                document.getElementById("send").click();
+            }
         }
-      }); 
-    
+    });
 
     document.getElementById("send").addEventListener('click', function () {
 
