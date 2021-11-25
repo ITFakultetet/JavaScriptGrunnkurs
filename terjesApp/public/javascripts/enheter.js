@@ -1,7 +1,7 @@
 window.onload = function () {
 
     div2.innerHTML = "";
-    div1.innerHTML = '<label for="sokefelt">Søk i enhetsregisteret</label> ' +
+    div1.innerHTML = '<label for="sokefelt">Søk i enhetsregisteret: </label> ' +
         '<input type="text" id="sokefelt" placeholder="Søk etter navn eller orgnummer">' +
         ' <button id="send" class="btn btn-success">Søk</button>';
     document.getElementById("sokefelt").focus();
@@ -13,7 +13,7 @@ window.onload = function () {
             event.preventDefault();
             // Trigger the button element with a click
             if (document.getElementById("sokefelt").value == "") {
-                alert("Tast inn firmanavn eller orgnummer")
+                alert("Tast inn firmanavn eller orgnummer ")
                 document.getElementById("sokefelt").focus();
             } else {
                 document.getElementById("send").click();
