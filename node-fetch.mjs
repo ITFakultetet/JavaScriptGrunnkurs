@@ -2,7 +2,7 @@
 
 // nb - node-fetch må installeres med npm: npm i node-fetch -g
 
-const fetch = require('node-fetch');
+import fetch from "node-fetch";
 
 fetch('https://web.itfakultetet.no/dogs.json')
 .then(data => data.json())
