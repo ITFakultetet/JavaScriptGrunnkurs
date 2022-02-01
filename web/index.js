@@ -17,15 +17,17 @@ window.onload = function () {
         console.log(document.getElementById("background-color").value);
         if (document.getElementById("background-color").value < '#aaaaaa') {
             document.getElementById("mainheading").style.color = "white";
+            document.querySelector("div").style.color = "white";
         } else {
             document.getElementById("mainheading").style.color = "black";
+            document.querySelector("div").style.color = "black";
         }
     });
 
 
     // Vis eller skjul bilde
     let visBilde = false;
-    knapp1.addEventListener("click", function () {
+    knapp1.addEventListener("click",  () => {
         div1.innerHTML = '<img id="bilde1" src="https://akamai.vgc.no/v2/images/e873e2d9-6e72-42e3-b5e9-b83423ae36f9?fit=crop&format=auto&h=1267&w=1900&s=ce31bdc24caad0e4a4b38b36d7c445a4c22073f4">';
         div1.style.marginTop = "10px";
 
@@ -102,6 +104,8 @@ window.onload = function () {
         document.getElementById("box" + i).remove();
     }
 
+
+    // Hent bedrifter fra Brønnøysundregisteret
     knapp3.addEventListener("click", hentFirmaInput);
 
     function hentFirmaInput() {
@@ -110,7 +114,9 @@ window.onload = function () {
         div1.innerHTML = '<label for="brregsok">Søk i enhetsregisteret: </label>' +
             '<input type="text" id="brregsok" placeholder="Søk etter navn eller orgnr">' +
             ' <button id="send">Søk</button>';
-        div2.innerHTML = "";
+        
+              
+            div2.innerHTML = "";
         document.getElementById("brregsok").focus();
        
 
