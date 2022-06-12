@@ -1,7 +1,7 @@
 var model = {
 	boardSize: 7,
-	numShips: 2,
-	shipLength: 2,
+	numShips: 3,
+	shipLength: 4,
 	shipsSunk: 0,
 	ships: [],
 

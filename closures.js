@@ -13,7 +13,6 @@ console.log(tell());
 
 
 
-
 // Eksempel 2
 
 let 

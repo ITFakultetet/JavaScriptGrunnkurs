@@ -56,7 +56,6 @@ window.onload = function () {
         let antall = prompt("Hvor mange bokser vil du lage?", "Antall bokser");
 
         for (let i = 1; i <= antall; i++) {
-
             let box = document.createElement("div");
             box.id = "box" + i;
             box.style.width = "40px";
@@ -68,6 +67,7 @@ window.onload = function () {
             box.style.cssFloat = "left";
             box.style.backgroundColor = "#efefef";
             div2.appendChild(box);
+
 
 
             box.appendChild(document.createTextNode(i));

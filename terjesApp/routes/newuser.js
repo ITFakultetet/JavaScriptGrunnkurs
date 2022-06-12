@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
         const coll = client.db("kurs").collection("kursbrukere");
         // Insert a single document
         coll.insertOne({ "navn": navn, "brukernavn": brukernavn, "passord": passord, "epost": epost, "dato": dato }, function(err, r) {
-            
+            console.log(navn,brukernavn,passord,epost,dato);
             client.close();
         });
 
