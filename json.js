@@ -1,5 +1,4 @@
-const person =
-{
+const person = {
     "fornavn": "Ola",
     "etternavn": "Nordmann",
     "alder": 25,
@@ -32,5 +31,6 @@ const person =
 
 
 console.log(person.initialer());
+
 
 

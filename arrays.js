@@ -53,11 +53,10 @@ console.log("Andre kursdag er slettet: "+minListe.join(" - "));
 
 minListe.splice(1,0,"Andre kursdag") // Legg til Andre kursdag igjen;
 
-console.log("Andre kursdag er lagt til igjen: "+minListe.join(" - "));
+console.log("Andre kursdag er lagt til igjen, på riktig sted: "+minListe.join(" - "));
 
-// Skjøte på et array til minListe
+// Skjøte på et array til minListe-arrayet
 console.log(minListe.concat(["Ny dag","Enda en ny dag"]));
-
 
 
 // Eksempel 2: Telle antall ord i en setning
@@ -68,6 +67,7 @@ let ord = setning.split(" ");
 
 // Tell antall ord
 
+console.log(setning);
 console.log("Antall ord:",ord.length);
 
 

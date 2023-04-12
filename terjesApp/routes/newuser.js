@@ -4,13 +4,9 @@ const saltRounds = 10;
 var router = express.Router();
 
 
-/* GET users listing. */
+/* GET newuser page. */
 router.get('/', function(req, res, next) {
-    res.render('new_user', {
-        title: 'Ny Bruker',
-        message: ''
-    });
-
+  res.render('newuser', { title: 'Ny bruker', message: '' });
 });
 
 /* Register new user. */
@@ -24,7 +20,7 @@ router.post('/', function(req, res, next) {
     const dato = req.body.dato;
 
     const MongoClient = require('mongodb').MongoClient;
-    const uri = "mongodb://noderia.com/kurs?retryWrites=true&w=majority";
+    const uri = "mongodb://kurs:kurs123@noderia.com:31017/kurs?retryWrites=true&w=majority";
     const client = new MongoClient(uri, { useNewUrlParser: true });
 
     client.connect(err => {
@@ -32,14 +28,14 @@ router.post('/', function(req, res, next) {
         const coll = client.db("kurs").collection("kursbrukere");
         // Insert a single document
         coll.insertOne({ "navn": navn, "brukernavn": brukernavn, "passord": passord, "epost": epost, "dato": dato }, function(err, r) {
-            
+            console.log(navn,brukernavn,passord,epost,dato);
             client.close();
         });
 
     });
 
-    res.render('new_user', {
-        title: 'Ny Bruker',
+    res.render('newuser', {
+        title: 'Ny bruker',
         message: `Ny bruker ${navn} lagret`
 
     });

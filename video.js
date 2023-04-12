@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const video = document.getElementById('video')
 
 Promise.all([
@@ -6,6 +7,10 @@ Promise.all([
   faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
   faceapi.nets.faceExpressionNet.loadFromUri('/models')
 ]).then(startVideo())
+=======
+window.onload = function () {
+video = document.getElementById("video");
+>>>>>>> e455fd3819e761a54ab0795ebeeb61a20983c9c1
 
 function startVideo() {
   navigator.mediaDevices.getUserMedia(
@@ -15,6 +20,7 @@ function startVideo() {
   )
 }
 
+<<<<<<< HEAD
 
   video.addEventListener('play', () => {
     const canvas = faceapi.createCanvasFromMedia(video)
@@ -32,3 +38,7 @@ function startVideo() {
   });
   
 
+=======
+startVideo();
+}
+>>>>>>> e455fd3819e761a54ab0795ebeeb61a20983c9c1

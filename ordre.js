@@ -2,7 +2,7 @@ let fs = require('fs');
 
 let output = fs.readFileSync('ordre.txt','utf8')
 .trim()
-.split('\r\n')
+.split('\n')
 .map(linje => linje.split('\t'))
 .reduce((kunder,felt) => {
     kunder[felt[0]] = kunder[felt[0]] || []
@@ -11,8 +11,9 @@ let output = fs.readFileSync('ordre.txt','utf8')
     antall: felt[2],
     pris:felt[3]
     })
-return kunder
+return kunder;
 }, {});
+
 
 console.log(JSON.stringify(output,null,2));
 

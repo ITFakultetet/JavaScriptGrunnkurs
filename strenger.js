@@ -13,7 +13,7 @@ console.log("tekst1 inneholder",tekst1.length,"tegn.");
 
 // Søk i tekst med regulære uttrykk og match()
 console.log(tekst1.match(/inneholder/));
-console.log(tekst1.match(/inneholder/)[0]);
+console.log(tekst1.match(/JavaScript/));
 console.log(tekst1.match(/inneholder/).index);
  
 // Trimme bort ekstra mellomrum i start og slutt
