@@ -29,6 +29,8 @@ console.log("Farger som array skrevet ut med join:", fargeArr.join(' - '));
 // Tell antall unike ord i en setning
 let unikeOrd = new Set();
 
+ord = "Dette er en setning som er en test".split(" ");
+
 ord.map(x => unikeOrd.add(x));
 
 console.log("Antall unike ord:", unikeOrd.size);
