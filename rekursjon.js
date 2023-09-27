@@ -2,7 +2,7 @@
 
 // EKsempel 1
 // Tell ned fra 10
-console.log("Tell ned fra 10\n");
+console.log("Tell ned fra 5\n");
 
 let tellNed = num => {
 	if (num == 0) return;
@@ -10,7 +10,7 @@ let tellNed = num => {
 	tellNed(num - 1);
 }
 
-tellNed(10);
+tellNed(50);
 
 // Eksempel 2
 // Fibonacci-tallrekke
@@ -22,7 +22,7 @@ let fibo = tall => {
 	return fibo(tall - 1) + fibo(tall - 2);
 }
 
-for (let n = 1; n < 31; n++) {
+for (let n = 1; n < 101; n++) {
 	console.log(fibo(n));
 }
 
@@ -33,7 +33,7 @@ console.log("\nFibonacci-tall fra 1 til 30 med smartere rekursjon\n");
 
 let fib = (a, b, n) => { if (n) return fib(b, a + b, n - 1); else return a }
 
-for (let n = 1; n < 31; n++) {
+for (let n = 1; n < 101; n++) {
 	console.log(fib(0, 1, n));
 }
 

@@ -11,7 +11,7 @@ window.onload = function () {
 
     avsnitt1.classList.add("silver");
 
-    const parentElement = document.querySelector('#article>section');
+    const parentElement = document.querySelector('#artikkel1>section');
     let allChildren = parentElement.querySelectorAll(":scope > p");
     allChildren.forEach(item => item.classList.add("silver"));
   
@@ -20,13 +20,13 @@ window.onload = function () {
     const newDiv = document.createElement("div");
 
     // and give it some content
-    const newContent = document.createTextNode("Og her kommer enda mer tekst!");
+    const newContent = document.createTextNode("Og her kommer en tekst satt inn med javascript!");
 
     // add the text node to the newly created div
     newDiv.appendChild(newContent);
 
     // add the newly created element and its content into the DOM
-    const currentDiv = document.getElementById("div1");
+    const currentDiv = document.getElementById("div2");
     document.body.insertBefore(newDiv, currentDiv);
 
 

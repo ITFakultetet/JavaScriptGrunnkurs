@@ -19,7 +19,7 @@ console.log("Terjes gateadresse: ",terje.get("adresse").gate);
 console.log("Terjes postnummer: ",terje.get("adresse").postnr);
 console.log("Terjes poststed: ",terje.get("adresse").poststed);
 
-
+console.log("-".repeat(40));
 
 // Bla gjennom map-objektet:
 terje.forEach((value, key) => {

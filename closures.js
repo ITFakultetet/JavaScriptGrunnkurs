@@ -1,9 +1,12 @@
 // Eksempel 1 - en funksjon som teller
 
-let  tell = (function () {
+let tell = (function () {
     let counter = 0;
-    return function () {counter++; return counter}
-  })();
+    return function () {
+        counter++;
+        return counter;
+    }
+})();
 
 console.log(tell());
 console.log(tell());
@@ -15,10 +18,7 @@ console.log(tell());
 
 // Eksempel 2
 
-let 
-obj1 = {value: 1},
-obj2 = {value: 2},
-obj3 = {value: 3};
+let obj1 = { value: 1 }, obj2 = { value: 2 }, obj3 = { value: 3 };
 
 let ValueAccumulator = function () {
     let values = [];

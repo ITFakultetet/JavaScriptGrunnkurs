@@ -3,24 +3,25 @@
     {
       "navn": "Vaffeljern",
       "antall": "1",
-      "pris": "299"
+      "pris": "299\r"
     },
     {
       "navn": "Lysestake",
       "antall": "4",
-      "pris": "400"
+      "pris": "400\r"
     }
   ],
   "Olga Pettersen": [
     {
       "navn": "Kontorstol",
       "antall": "1",
-      "pris": "1699"
+
+      "pris": "1699\r"
     },
     {
       "navn": "Skrivebord",
       "antall": "1",
-      "pris": "3890"
+      "pris": "3890\r"
     }
   ],
   "Oskar Bråthen": [

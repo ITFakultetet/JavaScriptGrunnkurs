@@ -1,6 +1,5 @@
 // Eksempler på bruk av bind
 
-
 // Eksempel 1
 
 let dog = {

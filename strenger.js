@@ -19,11 +19,13 @@ console.log(tekst1.match(/inneholder/).index);
 // Trimme bort ekstra mellomrum i start og slutt
 const tekst2 = "     Tekst med ekstra mellomrom      ";
 console.log(tekst2);
-console.log(tekst2.trim());
+console.log(tekst2.trim().replace(" med ", " uten ").toUpperCase());
 
 // Repeter en streng med repeat()
 const tekst3 = "Hei ";
 console.log(tekst3.repeat(5));
+
+console.log("-".repeat(30));
 
 
 // Erstatte deler av en tekst med replace()
@@ -80,3 +82,4 @@ console.log(str4.startsWith("Dette")); // true
 console.log(str4.endsWith("slutten"));  // false
 console.log(str4.includes("på"));       // true
 
+console.log("Dette er en setning med bokstaver og mellomrom".split(' ').reverse().join(' '));

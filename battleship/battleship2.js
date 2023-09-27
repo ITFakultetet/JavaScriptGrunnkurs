@@ -14,7 +14,6 @@ var model = {
 			};
 			model.ships.push(nyttskip);
 
-
 			var locations;
 			locations = this.generateShip();
 			model.ships[i].locations = locations;
@@ -203,5 +202,4 @@ function init() {
 	//console.log("ships");
 	console.log("Ships array: ");
 	console.log(model.ships);
-
 }

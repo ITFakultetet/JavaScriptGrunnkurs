@@ -2,7 +2,7 @@ esversion: 6;
 // Eksempler på bruk av reduce()
 
 // Eksempel 1: Beregne saldo for en konto
-
+/*
 let konto = [
     { "nummer": 1001, "transaksjon": 600 },
     { "nummer": 1002, "transaksjon": 300 },
@@ -18,11 +18,11 @@ console.log("Saldo for konto 1001:", saldo);
 
 // Output:
 // Saldo for konto 1001: 5800
-
+*/
 // Eksempel 2: Funksjon for summering av ukjent antall parametre 
 // ved hjelp av spread (...) og reduce()
-const summer = (...args) => [...args].reduce((x, y) => x + y);
-const summen = summer(3, 4, 6, 45);
+const summer = (...tall) => [...tall].reduce((x, y) => x + y);
+const summen = summer(3,45,65,78);
 console.log("Summen er:", summen); // 58
 
 

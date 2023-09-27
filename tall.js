@@ -27,4 +27,3 @@ console.log(Math.min(3,5,76,5,12,4)); // 3
 // Snitt (med reduce-funksjon)
 let avg = (array) => array.reduce((a, b) => a + b) / array.length;
 console.log(avg([1,2,3,4,5,6,7,7])); // 4.375
-

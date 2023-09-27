@@ -1,7 +1,7 @@
 // Eksempler på Dato og tid med JavaScript
 
 const d = new Date();
-console.log("I dag er det den "+(d.getDay()+1)+". dagen  i uka"); 
+console.log("I dag er det den "+(d.getDay())+". dagen  i uka"); 
 console.log("Måneden er: "+(d.getMonth()+1));
 
 // Ukedager ved navn:
@@ -17,7 +17,7 @@ console.log("Akkurat nå er Unix Timstamp :",tidsstempel2);
 console.log("Som vil si at det er :",(tidsstempel2-tidsstempel)/(1000*60*60),"timer siden kl 13:30 den 18. oktober 2021");
 
 
-// Måling av tid
+// Måling av tidlog
 let start = Date.now(); // millisekunder fra midnatt 1. Jan 1970
 
 // Gjør noe
@@ -29,8 +29,8 @@ console.log("Tallet ble:",doSomething);
 
 
 setTimeout(() => {
- console.log("Hei, etter 2 sekunder"); 
-}, 2000);
+ console.log("Hei, etter 5 sekunder"); 
+}, 5000);
 
 let end = Date.now(); // Tiden etter at løkken er gjennomført
 
