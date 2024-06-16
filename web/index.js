@@ -95,20 +95,22 @@ function markerBoks(i) {
         markert[i] = false;
 
     }
-    visMarkerte(); 
+    visMarkerte();
 }
 
 function visMarkerte() {
-let tekst = "Markert:   ";
- for(boks in markert ) {
-    markert[boks]==true? tekst = tekst + boks+" " : tekst; 
-}
- div1.innerHTML=tekst;  
+    let tekst = "Markert:   ";
+    for (boks in markert) {
+        markert[boks] ? tekst = tekst + boks + " " : tekst;
+    }
+    div1.innerHTML = tekst;
 }
 
 
 function fjernBoks(i) {
     document.getElementById("box" + i).remove();
+    markert[i] = false;
+    visMarkerte();
 }
 
 
