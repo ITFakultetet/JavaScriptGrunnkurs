@@ -24,12 +24,12 @@ console.log(pattern2.test('d')); //true
 
 // Sjekk om en streng begynner med ett ord
 const pattern3 = /^Dette/;
-console.log(pattern3.test('Dette stemmer')); //false
-console.log(pattern3.test('Men ikke dette')); //true
+console.log(pattern3.test('Dette stemmer')); //true
+console.log(pattern3.test('Men ikke dette')); //false
 
 
-// Sjekk om enn streng inneholder mer enn en forekomst av et ord
-const pattern4 = /eple/;
-
-
+// Sjekk om enn streng inneholder mer enn én forekomst av et ord
+const pattern4 = /eple/g;
+let epler = ('Dette er et eple, og dette er også et eple').matchAll(pattern4);
+for(eple of epler) console.log(eple);
 
