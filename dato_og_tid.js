@@ -21,11 +21,11 @@ console.log("Som vil si at det er :",(tidsstempel2-tidsstempel)/(1000*60*60),"ti
 let start = Date.now(); // millisekunder fra midnatt 1. Jan 1970
 
 // Gjør noe
-let doSomething = 0;
-for (let i = 1; i < 100000; i++) {
-     doSomething = i * i;
+let produkt = 1;
+for (let i = 1; i < 101; i++) {
+     produkt = produkt * i;
 }
-console.log("Tallet ble:",doSomething);
+console.log("Tallet ble:",produkt);
 
 
 setTimeout(() => {

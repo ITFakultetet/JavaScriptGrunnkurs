@@ -7,13 +7,14 @@
     tittel.style.textAlign = "";
 
     
-
+    // Velg alle <p>-elementer i det første <section>-elementet under elementet med id=artikkel1,
+    // mao alle avsnitt i første seksjon i artikkel 1.
     const parentElement = document.querySelector('#artikkel1>section');
     let allChildren = parentElement.querySelectorAll(":scope > p");
     allChildren.forEach(item => item.classList.add("silver"));
     
-    let avsnitt1 = document.querySelector("#seksjon2>h3+p")
-    avsnitt1.classList.add("silver");
+    let avsnitt1 = document.querySelectorAll("article>section>h3+p");
+    avsnitt1.forEach(avsnitt => avsnitt.classList.add("silver"));
 
     // create a new div element
     const newDiv = document.createElement("div");
