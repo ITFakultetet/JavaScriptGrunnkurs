@@ -5,14 +5,14 @@ console.log("I dag er det den "+(d.getDay())+". dagen  i uka");
 console.log("Måneden er: "+(d.getMonth()+1));
 
 // Ukedager ved navn:
-const ukedager = ['Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag','Søndag'];
-console.log("I dag er ukedagen:",ukedager[d.getDay()-1]);
+const ukedager = ['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'];
+console.log("I dag er ukedagen:",ukedager[d.getDay()]);
 
 const tidsstempel = Date.parse("2021-10-18T13:30:45");
 console.log("18. Oktober 2021 kl 13:30:45 var Unix Timstamp :",tidsstempel); 
 
 const tidsstempel2 = Date.now()
-console.log("Akkurat nå er Unix Timstamp :",tidsstempel2); 
+console.log("Akkurat nå er Unix Timestamp :",tidsstempel2); 
 
 console.log("Som vil si at det er :",(tidsstempel2-tidsstempel)/(1000*60*60),"timer siden kl 13:30 den 18. oktober 2021");
 
