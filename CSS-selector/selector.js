@@ -8,23 +8,24 @@
 
     
     // Velg alle <p>-elementer i det første <section>-elementet under elementet med id=artikkel1,
-    // mao alle avsnitt i første seksjon i artikkel 1.
+    // mao alle avsnitt i første seksjon i artikkel 1, og gi dem css-klassen silver
     const parentElement = document.querySelector('#artikkel1>section');
     let allChildren = parentElement.querySelectorAll(":scope > p");
     allChildren.forEach(item => item.classList.add("silver"));
-    
+
+    // Velg første avsnitt i alle seksjoner i alle artikler og gi dem css-klassen silver.
     let avsnitt1 = document.querySelectorAll("article>section>h3+p");
     avsnitt1.forEach(avsnitt => avsnitt.classList.add("silver"));
 
-    // create a new div element
+    // Lag et nytt div-element
     const newDiv = document.createElement("div");
 
-    // and give it some content
+    // Lag litt innhold i en tekstnode
     const newContent = document.createTextNode("Og her kommer en tekst satt inn med javascript!");
 
-    // add the text node to the newly created div
+    // og legg tekstnoden til det nye div-elementet
     newDiv.appendChild(newContent);
 
-    // add the newly created element and its content into the DOM
-    const currentDiv = document.getElementById("div2");
-    document.body.insertBefore(newDiv, currentDiv);
+    // og legg det nye div-elementet og dets innhold til i DOM før div2
+    const div2 = document.getElementById("div2");
+    document.body.insertBefore(newDiv, div2);
