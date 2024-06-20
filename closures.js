@@ -1,8 +1,8 @@
 // Eksempel 1 - en funksjon som teller
 
-let tell = (function () {
+let tell = (() => {
     let counter = 0;
-    return function () {
+    return () => {
         counter++;
         return counter;
     }
@@ -20,9 +20,9 @@ console.log(tell());
 
 let obj1 = { value: 1 }, obj2 = { value: 2 }, obj3 = { value: 3 };
 
-let ValueAccumulator = function () {
+let ValueAccumulator = () => {
     let values = [];
-    let accumulate = function (obj) {
+    let accumulate = obj => {
         if (obj) {
             values.push(obj.value);
             return values;
@@ -37,6 +37,14 @@ let accumulator = ValueAccumulator();
 accumulator(obj1);
 accumulator(obj2);
 accumulator(obj3);
+
+let acc2 = ValueAccumulator();
+acc2(obj2);
+acc2(obj1);
+
 console.log(accumulator());
 // Output: [obj1.value, obj2.value, obj3.value]
 console.log(accumulator().join(','));
+
+console.log(acc2());
+
