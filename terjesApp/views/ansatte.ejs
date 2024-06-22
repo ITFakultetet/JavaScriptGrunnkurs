@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ <script src="https://code.jquery.com/jquery-3.3.1.js"
+         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+         crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+ <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+ <link rel="stylesheet" href="/stylesheets/style.css">
+ <title><%= title %></title>
+</head>
+
+<body>
+
+<script>
+$(document).ready( function () {
+ $('#myTable').DataTable();
+} );
+</script>
+
+ <h1><%= title %></h1>
+
+ <section id="table" style="width:600px;">
+
+ <table id="myTable" >
+ <thead>
+ <tr>
+ <th id="Navn">Navn</th>
+ <th id="Født">Født</th>
+ <th id="Født">Kjønn</th>
+ </tr>
+ </thead>
+
+ <% for(var i = 0; i < ansatte.rows.length; i++) { %>
+ <tr class="tr">
+ <td class="td"><%= ansatte.rows[i].navn %></td>
+ <td class="td"><%= ansatte.rows[i].fodt %></td>
+ <td class="td"><%= ansatte.rows[i].kjonn %></td>
+ </tr>
+ <% } %> 
+ <tfoot>
+ <tr>
+ <th id="Navn">Navn</th>
+ <th id="Født">Født</th>
+ <th id="Født">Kjønn</th>
+ </tr>
+
+ </tfoot>
+ </table>
+
+</section>
+
+</body>
+</html>
