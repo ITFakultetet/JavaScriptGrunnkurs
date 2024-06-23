@@ -13,10 +13,21 @@ const produktet = produkt(3, 4, 6, 45);
 console.log("Produktet er:", produktet); // 3240
 
 //Eksempel 3
-// spread (...) for å slå sammen to arrays
+// spread (...) for å slå sammen to arrays og lage et JSON objekt av dem
 const biler1 = ['Volvo','Mercedes','Honda'];
 const biler2 = ['Nissan','Volkswagen','Renault'];
 const biler = [...biler1,...biler2];
 console.log(biler);   // [ 'Volvo', 'Mercedes', 'Honda', 'Nissan', 'Volkswagen', 'Renault' ]
 
+const biler_objekt = {...biler};
+console.log(biler_objekt); 
+// {
+//     '0': 'Volvo',
+//     '1': 'Mercedes',
+//     '2': 'Honda',
+//     '3': 'Nissan',
+//     '4': 'Volkswagen',
+//     '5': 'Renault'
+//   }
+  
 
