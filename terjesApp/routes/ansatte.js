@@ -20,29 +20,17 @@ router.get('/', function (req, res, next) {
 
         dbClient.query(query, function (err, result) {
 
-
             if (err) {
-
                 throw err;
-
             } else {
-
                 res.render('ansatte.ejs', {
-
                     title: 'Ansatte',
-
                     ansatte: result
-
                 });
-
                 res.end();
-
             }
-
         });
-
     });
-
 });
 
 module.exports = router;

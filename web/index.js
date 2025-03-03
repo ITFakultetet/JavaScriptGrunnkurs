@@ -139,14 +139,14 @@ function hentFirmaInput() {
 
 
     function hentFirma() {
-        let query = "https://hotell.difi.no/api/json/brreg/enhetsregisteret?query=" + document.getElementById("brregsok").value;
+        let query = "https://data.brreg.no/enhetsregisteret/api/enheter?navn=" + document.getElementById("brregsok").value;
         //  console.log(query);
         div2.innerHTML = "";
         div2.innerHTML = "<table id='tabell' class='tabell'></table>";
         fetch(query)
             .then(resp => resp.json())
             .then(data => {
-                let enheter = data.entries;
+                let enheter = data._embedded.enheter;
                 console.log(enheter);
 
                 let th = tabell.insertRow();
@@ -156,6 +156,9 @@ function hentFirmaInput() {
                 let orgnr = th.insertCell(1);
                 orgnr.innerHTML = "Orgnummer";
                 orgnr.className = "th";
+                let aktivitet = th.insertCell(2);
+                aktivitet.innerHTML = "Aktivitet";
+                aktivitet.className = "th";
 
                 return enheter.map(a => {
                     let tr = tabell.insertRow();
@@ -163,8 +166,11 @@ function hentFirmaInput() {
                     navnData.innerHTML = a.navn;
                     navnData.className = "td";
                     let orgnrData = tr.insertCell(1);
-                    orgnrData.innerHTML = a.orgnr;
+                    orgnrData.innerHTML = a.organisasjonsnummer;
                     orgnrData.className = "td";
+                    let aktivitet = tr.insertCell(2);
+                    aktivitet.innerHTML = a.aktivitet;
+                    aktivitet.className = "td";
 
                 });
 

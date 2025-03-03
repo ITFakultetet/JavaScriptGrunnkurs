@@ -1,7 +1,9 @@
 
 // Eksempel 1: Funksjon for summering av ukjent antall parametre 
 // ved hjelp av spread (...) og reduce()
+
 const summer = (...tall) => [...tall].reduce((x, y) => x + y,0);
+
 const summen = summer(3,45,65,78);
 console.log("Summen er:", summen); // 191
 

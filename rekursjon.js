@@ -2,7 +2,7 @@
 
 // EKsempel 1
 // Tell ned fra 10
-console.log("Tell ned fra 5\n");
+console.log("Tell ned fra 50\n");
 
 let tellNed = num => {
 	if (num == 0) return;
