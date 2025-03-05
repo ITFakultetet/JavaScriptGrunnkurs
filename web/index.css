@@ -1,16 +1,19 @@
 body {
     background-color: #efefef;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-left: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    margin-left: 50px;
 }
 
 #bilde1 {
   width: 700px;
-  border: solid 15px #aaa   
+  border: solid 20px #d3d3d3   
 }
 
-button, #background-color {
+#div1 {
+    margin-top: 10px;
+}
 
+button, #colorpicker {
     height: 32px;
     vertical-align: top;
 }
@@ -55,4 +58,28 @@ td:nth-child(2) {
     color: white;
     padding: 2px;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.unmarkedbox {
+    width: 40px;
+    height: 40px;
+    margin-left:  5px;
+    margin-top: 5px;
+    padding: 10px;
+    border: solid 1px silver;
+    float: left;
+    background-color: #efefef;
+    color: #000;
+}
+
+.markedbox {
+    width: 40px;
+    height: 40px;
+    margin-left:  5px;
+    margin-top: 5px;
+    padding: 10px;
+    border: solid 1px silver;
+    float: left;
+    background-color: #333;
+    color: #fff;
 }

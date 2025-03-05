@@ -104,14 +104,22 @@ let kontoSortert = konto.sort((a,b) => a.transaksjon > b.transaksjon ? 1 : -1); 
 
 console.log(kontoSortert);
 
-// 11. enkel sortering av tall-array
+// 11. enkel, men "destructive" sortering av tall-array
 let tall2 = [45,43,456,23,4,2];
 console.log("Usorterte tall",tall2);
 
 let tall2Sortert = tall2.sort((a,b)=> a - b); // Gir samme resultat som med tredelt operator, dvs + hvis a > b, - hvis a < b
 console.log("Sorterte tall",tall2Sortert);
+console.log("Arrayet tall2", tall2);
+
 
 console.log("Tall sortert som tekst",tall2.sort());
+console.log("Arrayet tall2", tall2);
+
+// 11.b Non-destructive sort
+tall2 = [45,43,456,23,4,2];
+console.log("Sortert uten å endre arrayet:",tall2.toSorted((a,b)=>a-b));
+console.log("Arrayet tall2", tall2);
 
 
 // 12. Beregn og skriv ut snittalderen på dyrene i øvelse 1
