@@ -23,13 +23,13 @@ window.onload = function () {
 
     document.getElementById("send").addEventListener('click', function () {
 
-        let query = "https://hotell.difi.no/api/json/brreg/enhetsregisteret?query=" + document.getElementById("sokefelt").value;
+        let query = "https://data.brreg.no/enhetsregisteret/api/enheter?navn=" + document.getElementById("sokefelt").value;
         // console.log(query);
         div2.innerHTML = "<table id='tabell' class='tabell'></table>";
         fetch(query)
             .then(resp => resp.json())
             .then(data => {
-                let enheter = data.entries;
+                let enheter = data._embedded.enheter;
                 //   console.log(enheter);
                 let th = tabell.insertRow();
                 let navn = th.insertCell(0);
@@ -44,7 +44,7 @@ window.onload = function () {
                     let navnData = tr.insertCell(0);
                     navnData.innerHTML = a.navn;
                     let orgnrData = tr.insertCell(1);
-                    orgnrData.innerHTML = a.orgnr;
+                    orgnrData.innerHTML = a.organisasjonsnummer;
                 });
 
 
