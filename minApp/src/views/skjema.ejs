@@ -1,0 +1,143 @@
+<%- include('partials/head', { tittel: tittel }) %>
+<%- include('partials/navbar', { aktiv: aktiv }) %>
+
+<main id="innhold" class="container py-4 py-lg-5">
+  <div class="side-hode">
+    <div>
+      <p class="mb-1">
+        <a class="epost-lenke" href="/">← Tilbake til oversikten</a>
+      </p>
+      <h1><%= modus === 'ny' ? 'Ny kontakt' : 'Rediger kontakt' %></h1>
+      <p class="undertittel">
+        <% if (modus === 'ny') { %>
+          Fyll ut navn og e-post. Telefon og notat er valgfritt.
+        <% } else { %>
+          Endre feltene og trykk Lagre. Alle felt valideres på serveren.
+        <% } %>
+      </p>
+      <% if (modus === 'rediger' && kontakt.endret) { %>
+      <p class="skjema-metadata">
+        Opprettet <%= formaterDato(kontakt.opprettet) %> · sist endret <%=
+        formaterDato(kontakt.endret) %>
+      </p>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (feilmelding) { %>
+  <div class="varsel varsel-feil" role="alert">
+    <span class="varsel-prikk" aria-hidden="true"></span>
+    <span><%= feilmelding %></span>
+  </div>
+  <% } %>
+
+  <section class="kort">
+    <!--
+      Ett skjema brukes for både «ny» og «rediger». Forskjellen er bare
+      action-attributtet og hvilke verdier som er fylt inn – det sparer oss for
+      å vedlikeholde to nesten like sider.
+
+      novalidate: vi slår bevisst av nettleserens egen validering, slik at du
+      ser at det er SERVEREN som bestemmer. Nettleservalidering er bare et
+      hyggelig hint – den kan skrus av, og API-et ser den aldri.
+    -->
+    <form class="skjema skjema-kort" method="post" action="<%= handling %>" novalidate>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="felt">
+            <label class="felt-etikett" for="navn">Navn <span class="pakrevd">*</span></label>
+            <input
+              class="form-control <%= feilFelt.navn ? 'er-feil' : '' %>"
+              id="navn"
+              name="navn"
+              type="text"
+              value="<%= kontakt.navn || '' %>"
+              maxlength="100"
+              autocomplete="name"
+              aria-describedby="navn-hjelp <%= feilFelt.navn ? 'navn-feil' : '' %>"
+              <%- feilFelt.navn ? 'aria-invalid="true"' : '' %>
+            />
+            <% if (feilFelt.navn) { %>
+            <p class="felt-feil" id="navn-feil"><%= feilFelt.navn %></p>
+            <% } else { %>
+            <span class="hjelpetekst" id="navn-hjelp">Fullt navn, 2–100 tegn.</span>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="felt">
+            <label class="felt-etikett" for="epost">E-post <span class="pakrevd">*</span></label>
+            <input
+              class="form-control <%= feilFelt.epost ? 'er-feil' : '' %>"
+              id="epost"
+              name="epost"
+              type="email"
+              value="<%= kontakt.epost || '' %>"
+              maxlength="200"
+              autocomplete="email"
+              aria-describedby="epost-hjelp <%= feilFelt.epost ? 'epost-feil' : '' %>"
+              <%- feilFelt.epost ? 'aria-invalid="true"' : '' %>
+            />
+            <% if (feilFelt.epost) { %>
+            <p class="felt-feil" id="epost-feil"><%= feilFelt.epost %></p>
+            <% } else { %>
+            <span class="hjelpetekst" id="epost-hjelp">Lagres med små bokstaver. Må være unik.</span>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="felt">
+            <label class="felt-etikett" for="telefon">Telefon</label>
+            <input
+              class="form-control <%= feilFelt.telefon ? 'er-feil' : '' %>"
+              id="telefon"
+              name="telefon"
+              type="tel"
+              value="<%= kontakt.telefon || '' %>"
+              maxlength="20"
+              autocomplete="tel"
+              aria-describedby="telefon-hjelp <%= feilFelt.telefon ? 'telefon-feil' : '' %>"
+              <%- feilFelt.telefon ? 'aria-invalid="true"' : '' %>
+            />
+            <% if (feilFelt.telefon) { %>
+            <p class="felt-feil" id="telefon-feil"><%= feilFelt.telefon %></p>
+            <% } else { %>
+            <span class="hjelpetekst" id="telefon-hjelp">Valgfritt. Tall, mellomrom og + ( ) . -</span>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="felt">
+            <label class="felt-etikett" for="notat">Notat</label>
+            <textarea
+              class="form-control <%= feilFelt.notat ? 'er-feil' : '' %>"
+              id="notat"
+              name="notat"
+              rows="4"
+              maxlength="1000"
+              aria-describedby="notat-hjelp <%= feilFelt.notat ? 'notat-feil' : '' %>"
+              <%- feilFelt.notat ? 'aria-invalid="true"' : '' %>
+            ><%= kontakt.notat || '' %></textarea>
+            <% if (feilFelt.notat) { %>
+            <p class="felt-feil" id="notat-feil"><%= feilFelt.notat %></p>
+            <% } else { %>
+            <span class="hjelpetekst" id="notat-hjelp">Valgfritt. Maks 1000 tegn.</span>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <div class="skjema-handlinger">
+        <button class="btn btn-primaer" type="submit">
+          <%= modus === 'ny' ? 'Lagre kontakten' : 'Lagre endringene' %>
+        </button>
+        <a class="btn btn-lys" href="/">Avbryt</a>
+      </div>
+    </form>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

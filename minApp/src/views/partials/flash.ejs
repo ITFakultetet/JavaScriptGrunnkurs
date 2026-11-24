@@ -1,0 +1,13 @@
+<!--
+  Server-rendret varselmelding etter lagring/sletting.
+
+  Dette er «alert»-varianten, som virker helt uten JavaScript. Når
+  kontakter.js er på plass, viser den i tillegg en toast for handlinger som
+  gjøres med fetch – se visVarsel() i public/js/kontakter.js.
+-->
+<% if (typeof varsel !== 'undefined' && varsel) { %>
+<div class="varsel varsel-<%= varsel.type %>" role="status">
+  <span class="varsel-prikk" aria-hidden="true"></span>
+  <span><%= varsel.tekst %></span>
+</div>
+<% } %>

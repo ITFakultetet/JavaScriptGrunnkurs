@@ -1,0 +1,269 @@
+<%- include('partials/head', { tittel: 'Oversikt' }) %>
+<%- include('partials/navbar', { aktiv: aktiv }) %>
+
+<%
+  /* ---------------------------------------------------------------------
+     Hjelpere for å bygge lenker som beholder søk og sortering.
+     Uten dette ville et sideskift nullstilt søket, som er en klassisk
+     irritasjon i tabeller med paginering.
+     --------------------------------------------------------------------- */
+  const byggLenke = (endringer = {}) => {
+    const p = new URLSearchParams();
+    const nySok = endringer.sok ?? sok;
+    const nySortering = endringer.sortering ?? sortering;
+    const nyRetning = endringer.retning ?? retning;
+    const nySide = endringer.side ?? 1;
+    if (nySok) p.set('sok', nySok);
+    p.set('sortering', nySortering);
+    p.set('retning', nyRetning);
+    if (nySide > 1) p.set('side', String(nySide));
+    // &amp; fordi lenken skrives inn i HTML – & alene er ugyldig der.
+    return '/?' + p.toString().replace(/&/g, '&amp;');
+  };
+
+  const kolonner = [
+    { nokkel: 'navn', tekst: 'Navn' },
+    { nokkel: 'epost', tekst: 'E-post' },
+    { nokkel: 'telefon', tekst: 'Telefon' },
+    { nokkel: 'endret', tekst: 'Sist endret' },
+  ];
+
+  // Vis første, siste og sidene rundt den aktive – med «…» i mellom.
+  const sideNumre = [];
+  for (let nr = 1; nr <= antallSider; nr++) {
+    if (nr === 1 || nr === antallSider || Math.abs(nr - side) <= 1) sideNumre.push(nr);
+    else if (sideNumre[sideNumre.length - 1] !== '...') sideNumre.push('...');
+  }
+%>
+
+<main id="innhold" class="container py-4 py-lg-5">
+  <div class="side-hode">
+    <div>
+      <h1>Kontakter</h1>
+      <p class="undertittel">
+        Alle kontakter lagres i PostgreSQL. Søk, sorter, rediger – eller legg til en ny.
+      </p>
+    </div>
+    <a class="btn btn-primaer" href="/ny">+ Ny kontakt</a>
+  </div>
+
+  <%- include('partials/flash', { varsel: varsel }) %>
+
+  <section class="kort" aria-labelledby="tabellTittel">
+    <h2 id="tabellTittel" class="visually-hidden">Kontaktliste</h2>
+
+    <div class="kort-topp">
+      <div class="sok">
+        <label class="visually-hidden" for="sokFelt">Søk i kontakter</label>
+        <div class="sok-ramme">
+          <svg
+            class="sok-ikon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+          </svg>
+          <input
+            id="sokFelt"
+            class="form-control sok-felt"
+            type="search"
+            name="sok"
+            value="<%= sok %>"
+            placeholder="Søk på navn, e-post eller telefon"
+            autocomplete="off"
+          />
+        </div>
+      </div>
+
+      <p class="treff" id="treff" role="status">
+        <%= totalt %> <%= totalt === 1 ? 'kontakt' : 'kontakter' %><% if (sok) { %> for «<%= sok %>»<% } %>
+      </p>
+    </div>
+
+    <div class="tabell-rull">
+      <table
+        class="tabell"
+        id="kontaktTabell"
+        data-sok="<%= sok %>"
+        data-sortering="<%= sortering %>"
+        data-retning="<%= retning %>"
+        data-side="<%= side %>"
+        data-per-side="<%= perSide %>"
+      >
+        <caption class="visually-hidden">
+          Kontakter med navn, e-post, telefon og siste endring
+        </caption>
+        <thead>
+          <tr>
+            <% for (const kolonne of kolonner) { %>
+            <% const erAktiv = sortering === kolonne.nokkel; %>
+            <% const nyRetning = erAktiv && retning === 'asc' ? 'desc' : 'asc'; %>
+            <th scope="col" <%= kolonne.nokkel === 'endret' ? 'class="celle-dato"' : '' %>>
+              <a
+                class="sortering <%= erAktiv ? 'er-sortert' : '' %>"
+                href="<%= byggLenke({ sortering: kolonne.nokkel, retning: nyRetning }) %>"
+                title="Sorter på <%= kolonne.tekst.toLowerCase() %>"
+                ><%= kolonne.tekst %><span class="pil" aria-hidden="true"
+                  ><%= erAktiv ? (retning === 'asc' ? '▲' : '▼') : '' %></span
+                ></a
+              >
+            </th>
+            <% } %>
+            <th scope="col" class="celle-handlinger">
+              <span class="visually-hidden">Handlinger</span>
+            </th>
+          </tr>
+        </thead>
+
+        <tbody id="kontaktRader">
+          <% if (rader.length === 0) { %>
+          <tr>
+            <td colspan="5">
+              <div class="tom-tilstand">
+                <div class="tom-ikon" aria-hidden="true">
+                  <svg
+                    width="26"
+                    height="26"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9.5" cy="7" r="4"></circle>
+                    <path d="M20 8v6M23 11h-6"></path>
+                  </svg>
+                </div>
+                <% if (sok) { %>
+                <h2>Ingen treff på «<%= sok %>»</h2>
+                <p>Prøv et annet søkeord, eller <a href="/">nullstill søket</a>.</p>
+                <% } else { %>
+                <h2>Ingen kontakter ennå</h2>
+                <p>Legg inn den første kontakten for å komme i gang.</p>
+                <a class="btn btn-primaer" href="/ny">+ Ny kontakt</a>
+                <% } %>
+              </div>
+            </td>
+          </tr>
+          <% } %> <% for (const kontakt of rader) { %>
+          <tr data-id="<%= kontakt.id %>">
+            <td>
+              <div class="celle-navn">
+                <span class="avatar" aria-hidden="true"
+                  ><%= kontakt.navn.trim().charAt(0).toUpperCase() %></span
+                >
+                <span class="navn-og-notat">
+                  <span class="navn-tekst"><%= kontakt.navn %></span>
+                  <% if (kontakt.notat) { %>
+                  <span class="notat-tekst" title="<%= kontakt.notat %>"><%= kontakt.notat %></span>
+                  <% } %>
+                </span>
+              </div>
+            </td>
+            <td>
+              <a class="epost-lenke" href="mailto:<%= kontakt.epost %>"><%= kontakt.epost %></a>
+            </td>
+            <td class="celle-telefon"><%= kontakt.telefon || '–' %></td>
+            <td class="celle-dato"><%= formaterDato(kontakt.endret) %></td>
+            <td class="celle-handlinger">
+              <a class="btn btn-liten btn-lys" href="/<%= kontakt.id %>/rediger">Rediger</a>
+              <!--
+                Uten JavaScript sender dette skjemaet en vanlig POST til serveren.
+                Med JavaScript tar kontakter.js over: den viser bekreftelsesmodalen
+                og bruker DELETE mot JSON-API-et i stedet. Samme knapp, to veier.
+              -->
+              <form
+                class="slett-skjema"
+                method="post"
+                action="/<%= kontakt.id %>/slett"
+                data-api="/api/kontakter/<%= kontakt.id %>"
+                data-navn="<%= kontakt.navn %>"
+              >
+                <button class="btn btn-liten btn-fare-lys" type="submit">Slett</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="paginering">
+      <% if (antallSider > 1) { %>
+      <nav class="paginering" aria-label="Sidenavigering">
+        <ul class="paginering-liste">
+          <li>
+            <% if (side > 1) { %>
+            <a class="side-knapp" href="<%= byggLenke({ side: side - 1 }) %>">Forrige</a>
+            <% } else { %>
+            <span class="side-knapp deaktivert" aria-disabled="true">Forrige</span>
+            <% } %>
+          </li>
+
+          <% for (const nr of sideNumre) { %> <% if (nr === '...') { %>
+          <li><span class="side-avstand" aria-hidden="true">…</span></li>
+          <% } else if (nr === side) { %>
+          <li>
+            <span class="side-knapp er-her" aria-current="page"><%= nr %></span>
+          </li>
+          <% } else { %>
+          <li>
+            <a class="side-knapp" href="<%= byggLenke({ side: nr }) %>"><%= nr %></a>
+          </li>
+          <% } %> <% } %>
+
+          <li>
+            <% if (side < antallSider) { %>
+            <a class="side-knapp" href="<%= byggLenke({ side: side + 1 }) %>">Neste</a>
+            <% } else { %>
+            <span class="side-knapp deaktivert" aria-disabled="true">Neste</span>
+            <% } %>
+          </li>
+        </ul>
+      </nav>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<!-- Bekreftelsesmodal før sletting. Skjult til kontakter.js åpner den. -->
+<div
+  class="modal fade"
+  id="slettModal"
+  tabindex="-1"
+  aria-labelledby="slettModalTittel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content slett-modal">
+      <div class="modal-header">
+        <h2 class="modal-title h5" id="slettModalTittel">Slette kontakten?</h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Lukk"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0">
+          Er du sikker på at du vil slette <strong id="slettNavn"></strong>? Handlingen kan ikke
+          angres.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lys" data-bs-dismiss="modal">Avbryt</button>
+        <button type="button" class="btn btn-fare" id="slettBekreft">Ja, slett</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

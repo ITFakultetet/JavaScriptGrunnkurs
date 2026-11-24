@@ -1,0 +1,34 @@
+# PostgreSQL for lokal utvikling.
+#
+#   docker compose up -d      start databasen i bakgrunnen
+#   docker compose logs -f db  se hva databasen gjør
+#   docker compose down       stopp (dataene beholdes i volumet)
+#   docker compose down -v    stopp OG slett alle data
+#
+# Passordet er en standardverdi KUN for lokal bruk. Vil du bruke noe annet,
+# sett POSTGRES_PASSWORD i miljøet eller i en .env-fil ved siden av denne.
+
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: kontakter-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-jsgk}
+      POSTGRES_USER: ${POSTGRES_USER:-jsgk}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-jsgk_dev_pw}
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    volumes:
+      - kontakter-db-data:/var/lib/postgresql/data
+    healthcheck:
+      # «healthy» betyr at databasen faktisk tar imot spørringer, ikke bare at
+      # containeren kjører. Da kan appen trygt starte etter den.
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-jsgk} -d ${POSTGRES_DB:-jsgk}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+volumes:
+  kontakter-db-data:

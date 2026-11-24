@@ -1,0 +1,23 @@
+<!--
+  Toppmeny. «aktiv» kommer fra app.locals og settes i hver res.render(), slik
+  at gjeldende side markeres – både med farge og med understrek, så det også
+  er tydelig uten å skille på farge.
+-->
+<header class="toppbar">
+  <div class="container toppbar-inn">
+    <a class="merke" href="/">
+      <span class="merke-prikk" aria-hidden="true"></span>
+      Kontakter
+    </a>
+
+    <nav class="toppmeny" aria-label="Hovedmeny">
+      <span class="merke-liten">ITFakultetet · JavaScript Grunnkurs</span>
+      <a class="toppmeny-lenke <%= aktiv === 'oversikt' ? 'aktiv' : '' %>" href="/"
+        <%= aktiv === 'oversikt' ? 'aria-current="page"' : '' %>>Oversikt</a
+      >
+      <a class="toppmeny-lenke <%= aktiv === 'ny' ? 'aktiv' : '' %>" href="/ny"
+        <%= aktiv === 'ny' ? 'aria-current="page"' : '' %>>Ny kontakt</a
+      >
+    </nav>
+  </div>
+</header>

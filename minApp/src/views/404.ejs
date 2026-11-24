@@ -1,0 +1,16 @@
+<%- include('partials/head', { tittel: 'Siden finnes ikke' }) %>
+<%- include('partials/navbar', { aktiv: aktiv }) %>
+
+<main id="innhold" class="container py-4 py-lg-5">
+  <section class="kort melding-kort">
+    <span class="melding-kode">404</span>
+    <h1>Siden finnes ikke</h1>
+    <p>
+      Vi fant ingen side på denne adressen. Den kan ha blitt flyttet, eller lenken kan være
+      skrevet feil.
+    </p>
+    <a class="btn btn-primaer" href="/">Til oversikten</a>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

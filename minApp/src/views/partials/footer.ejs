@@ -1,0 +1,41 @@
+    <footer class="bunn">
+      <div class="container">
+        Eksempelapp fra <strong>JavaScript Grunnkurs</strong> hos ITFakultetet – Express 5, EJS,
+        PostgreSQL og Bootstrap. Dataene ligger i tabellen <code>kontakter</code>.
+      </div>
+    </footer>
+
+    <!--
+      Beholder for toasts. kontakter.js fyller den når noe er slettet eller
+      oppdatert via fetch. Ligger her fordi den skal være tilgjengelig på alle
+      sider, og fordi den må være UTENFOR hovedinnholdet for å kunne ligge
+      øverst i hjørnet.
+    -->
+    <div
+      class="toast-container position-fixed top-0 end-0 p-3"
+      id="varselBeholder"
+      aria-live="polite"
+      aria-atomic="true"
+    ></div>
+
+    <!-- Mal for én toast. <template> vises ikke, den brukes bare som oppskrift. -->
+    <template id="varselMal">
+      <div class="toast varsel-toast" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-body d-flex align-items-center">
+          <span class="varsel-prikk" aria-hidden="true"></span>
+          <span class="varsel-tekst"></span>
+          <button
+            type="button"
+            class="btn-close ms-auto"
+            data-bs-dismiss="toast"
+            aria-label="Lukk"
+          ></button>
+        </div>
+      </div>
+    </template>
+
+    <!-- Rekkefølgen betyr noe: Bootstrap må lastes før vår egen kode bruker den. -->
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/js/kontakter.js"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<%- include('partials/head', { tittel: tittel }) %>
+<%- include('partials/navbar', { aktiv: aktiv }) %>
+
+<main id="innhold" class="container py-4 py-lg-5">
+  <section class="kort melding-kort">
+    <span class="melding-kode"><%= status %></span>
+    <h1>Noe gikk galt</h1>
+    <p><%= melding %></p>
+
+    <!--
+      Stabelspor vises bare når vi IKKE er i produksjon – se
+      src/middleware/errors.js. I produksjon er detaljer gratis informasjon
+      for en angriper.
+    -->
+    <% if (typeof detaljer !== 'undefined' && detaljer) { %>
+    <details class="text-start mt-4">
+      <summary>Teknisk detalj (kun i utvikling)</summary>
+      <pre class="mt-2 mb-0"><code><%= detaljer %></code></pre>
+    </details>
+    <% } %>
+
+    <p class="mt-4 mb-0">
+      <a class="btn btn-primaer" href="/">Til oversikten</a>
+    </p>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

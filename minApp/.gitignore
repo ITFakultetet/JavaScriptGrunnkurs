@@ -1,0 +1,20 @@
+# Avhengigheter – installeres på nytt med «npm install»
+node_modules/
+
+# Miljøvariabler med hemmeligheter. Skal aldri i versjonskontroll.
+.env
+.env.local
+.env.*.local
+
+# Logger og midlertidige filer
+logs/
+*.log
+npm-debug.log*
+
+# Test- og dekningsrapporter
+coverage/
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store

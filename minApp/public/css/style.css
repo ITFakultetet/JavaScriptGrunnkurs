@@ -1,0 +1,804 @@
+/* =========================================================================
+   Kontakter – eget designspråk (ITFakultetet, lyst tema)
+
+   Bootstrap gir struktur (grid, knapper, modal, toast). Her overstyrer vi
+   fargene og finpusser komponentene. Alt er samlet i CSS-variabler øverst, så
+   det er ÉN plass å endre hvis profilen skal skiftes.
+   ========================================================================= */
+
+:root {
+  /* ITFakultetets palett */
+  --bakgrunn: #f4f7ff;
+  --bakgrunn-dyp: #e9f0ff;
+  --kort: #ffffff;
+  --kant: #dbe4f5;
+  --tekst: #12233f;
+  --dempet: #5a6b8c;
+  --primaer: #0f4c81;
+  --primaer-moerk: #0b3a63;
+  --primaer-lys: #e8f0fb;
+  --gronn: #0e9f7a;
+  --gronn-lys: #e6f7f1;
+  --fare: #e05656;
+  --fare-lys: #fdeced;
+
+  --radius: 12px;
+  --radius-liten: 8px;
+  --skygge: 0 2px 14px rgba(15, 76, 129, 0.07);
+  --skygge-hover: 0 8px 26px rgba(15, 76, 129, 0.13);
+
+  /* Bootstrap-variabler vi vil styre */
+  --bs-body-bg: var(--bakgrunn);
+  --bs-body-color: var(--tekst);
+  --bs-body-font-family:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --bs-border-color: var(--kant);
+  --bs-link-color: var(--primaer);
+  --bs-link-hover-color: var(--gronn);
+  --bs-secondary-color: var(--dempet);
+  --bs-emphasis-color: var(--tekst);
+  --bs-border-radius: var(--radius-liten);
+}
+
+/* --- Grunnflate ---------------------------------------------------------- */
+
+body {
+  min-height: 100vh;
+  /* Myk overgang fra lysblått til nesten hvitt. Uten «fixed» strekker
+     gradienten seg over hele dokumentet i stedet for bare vinduet. */
+  background: linear-gradient(180deg, var(--bakgrunn) 0%, #fbfcff 60%, var(--bakgrunn-dyp) 100%);
+  color: var(--tekst);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.container {
+  width: min(1120px, 100% - 2rem);
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+/* Snarvei for tastatur- og skjermleserbrukere: første tab hopper rett til
+   innholdet. Usynlig til den får fokus. */
+.hopp-til-innhold {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1100;
+  padding: 0.6rem 1rem;
+  background: var(--kort);
+  color: var(--primaer);
+  border-radius: 0 0 var(--radius) 0;
+  box-shadow: var(--skygge-hover);
+}
+
+.hopp-til-innhold:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(15, 76, 129, 0.35);
+  outline-offset: 2px;
+}
+
+/* --- Toppmeny ------------------------------------------------------------ */
+
+.toppbar {
+  background: var(--kort);
+  border-bottom: 1px solid var(--kant);
+  box-shadow: var(--skygge);
+}
+
+.toppbar-inn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding-block: 0.9rem;
+}
+
+.merke {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primaer);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.merke-prikk {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gronn) 0%, #4ad9b4 100%);
+  box-shadow: 0 0 0 4px rgba(14, 159, 122, 0.14);
+}
+
+.toppmeny {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1.25rem;
+  margin-left: auto;
+}
+
+.toppmeny-lenke {
+  position: relative;
+  padding-block: 0.35rem;
+  color: var(--dempet);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.toppmeny-lenke:hover {
+  color: var(--primaer);
+}
+
+/* Aktiv side markeres med farge + understrek, ikke bare farge – det er mer
+   tydelig og fungerer også for fargeblinde. */
+.toppmeny-lenke.aktiv {
+  color: var(--primaer);
+}
+
+.toppmeny-lenke.aktiv::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--gronn);
+}
+
+.merke-liten {
+  width: 100%;
+  order: 3;
+  font-size: 0.85rem;
+  color: var(--dempet);
+}
+
+@media (min-width: 768px) {
+  .merke-liten {
+    width: auto;
+    order: 0;
+    margin-left: 0.5rem;
+    padding-left: 1rem;
+    border-left: 1px solid var(--kant);
+  }
+}
+
+/* --- Sidehode ------------------------------------------------------------ */
+
+.side-hode {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.side-hode h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--primaer);
+}
+
+.undertittel {
+  margin: 0.35rem 0 0;
+  color: var(--dempet);
+  max-width: 60ch;
+}
+
+/* --- Kort ---------------------------------------------------------------- */
+
+.kort {
+  background: var(--kort);
+  border: 1px solid var(--kant);
+  border-radius: var(--radius);
+  box-shadow: var(--skygge);
+  overflow: hidden;
+}
+
+.kort-topp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 1rem 1.15rem;
+  border-bottom: 1px solid var(--kant);
+  background: linear-gradient(180deg, #fbfdff 0%, var(--kort) 100%);
+}
+
+/* --- Søk ----------------------------------------------------------------- */
+
+.sok {
+  flex: 1 1 260px;
+  max-width: 420px;
+}
+
+.sok-ramme {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sok-ikon {
+  position: absolute;
+  left: 0.8rem;
+  width: 18px;
+  height: 18px;
+  color: var(--dempet);
+  pointer-events: none;
+}
+
+.sok-felt {
+  padding-left: 2.5rem;
+  background: #fbfdff;
+  border: 1px solid var(--kant);
+  border-radius: var(--radius-liten);
+  color: var(--tekst);
+}
+
+.sok-felt::placeholder {
+  color: #8b9ab6;
+}
+
+.sok-felt:focus {
+  background: var(--kort);
+  border-color: var(--primaer);
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.14);
+}
+
+.treff {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dempet);
+  white-space: nowrap;
+}
+
+/* --- Tabell -------------------------------------------------------------- */
+
+.tabell-rull {
+  overflow-x: auto;
+}
+
+.tabell {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabell thead th {
+  padding: 0.7rem 1.15rem;
+  background: var(--primaer-lys);
+  color: var(--primaer);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--kant);
+}
+
+.tabell tbody td {
+  padding: 0.75rem 1.15rem;
+  border-bottom: 1px solid #edf2fb;
+  vertical-align: middle;
+}
+
+.tabell tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.tabell tbody tr {
+  transition: background-color 0.12s ease;
+}
+
+.tabell tbody tr:hover {
+  background: #f6f9ff;
+}
+
+.celle-navn {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 220px;
+}
+
+.avatar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primaer-lys);
+  color: var(--primaer);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.navn-og-notat {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.navn-tekst {
+  font-weight: 600;
+  color: var(--tekst);
+}
+
+.notat-tekst {
+  font-size: 0.82rem;
+  color: var(--dempet);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 34ch;
+}
+
+.epost-lenke {
+  color: var(--primaer);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.epost-lenke:hover {
+  color: var(--gronn);
+  text-decoration: underline;
+}
+
+.celle-telefon {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.celle-dato {
+  white-space: nowrap;
+  color: var(--dempet);
+  font-variant-numeric: tabular-nums;
+}
+
+.celle-handlinger {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.celle-handlinger .slett-skjema {
+  display: inline;
+  margin: 0;
+}
+
+/* --- Knapper ------------------------------------------------------------- */
+
+.btn {
+  font-weight: 600;
+  border-radius: var(--radius-liten);
+}
+
+.btn-primaer {
+  --bs-btn-bg: var(--primaer);
+  --bs-btn-border-color: var(--primaer);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: var(--primaer-moerk);
+  --bs-btn-hover-border-color: var(--primaer-moerk);
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-bg: var(--primaer-moerk);
+  --bs-btn-active-border-color: var(--primaer-moerk);
+  --bs-btn-focus-shadow-rgb: 15, 76, 129;
+  padding: 0.55rem 1.15rem;
+}
+
+.btn-lys {
+  --bs-btn-bg: var(--kort);
+  --bs-btn-border-color: var(--kant);
+  --bs-btn-color: var(--primaer);
+  --bs-btn-hover-bg: var(--primaer-lys);
+  --bs-btn-hover-border-color: var(--primaer);
+  --bs-btn-hover-color: var(--primaer);
+  --bs-btn-active-bg: var(--primaer-lys);
+  --bs-btn-active-color: var(--primaer);
+  padding: 0.55rem 1.15rem;
+}
+
+.btn-fare {
+  --bs-btn-bg: var(--fare);
+  --bs-btn-border-color: var(--fare);
+  --bs-btn-color: #ffffff;
+  --bs-btn-hover-bg: #c94444;
+  --bs-btn-hover-border-color: #c94444;
+  --bs-btn-hover-color: #ffffff;
+  padding: 0.55rem 1.15rem;
+}
+
+.btn-fare-lys {
+  --bs-btn-bg: var(--fare-lys);
+  --bs-btn-border-color: transparent;
+  --bs-btn-color: #a52f2f;
+  --bs-btn-hover-bg: var(--fare);
+  --bs-btn-hover-border-color: var(--fare);
+  --bs-btn-hover-color: #ffffff;
+  padding: 0.55rem 1.15rem;
+}
+
+.btn-liten {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+  border-radius: 7px;
+}
+
+/* --- Sorterbare kolonner ------------------------------------------------ */
+
+.sortering {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sortering:hover {
+  color: var(--primaer-moerk);
+  text-decoration: underline;
+}
+
+.sortering .pil {
+  font-size: 0.7em;
+  line-height: 1;
+}
+
+.sortering.er-sortert {
+  color: var(--primaer);
+}
+
+/* --- Paginering ---------------------------------------------------------- */
+
+.paginering {
+  padding: 0.9rem 1.15rem;
+  border-top: 1px solid var(--kant);
+  background: #fbfdff;
+}
+
+.paginering-liste {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.side-knapp {
+  display: inline-block;
+  min-width: 2.2rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--kant);
+  border-radius: 7px;
+  background: var(--kort);
+  color: var(--primaer);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.side-knapp:hover {
+  border-color: var(--primaer);
+  background: var(--primaer-lys);
+  color: var(--primaer);
+}
+
+.side-knapp.er-her {
+  background: var(--primaer);
+  border-color: var(--primaer);
+  color: #ffffff;
+}
+
+.side-knapp.deaktivert {
+  color: #a9b6cd;
+  background: #f7f9fd;
+  border-color: #e7eefb;
+  pointer-events: none;
+}
+
+.side-avstand {
+  padding-inline: 0.2rem;
+  color: var(--dempet);
+}
+
+/* --- Tom tilstand -------------------------------------------------------- */
+
+.tom-tilstand {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.tom-ikon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 0.9rem;
+  border-radius: 50%;
+  background: var(--primaer-lys);
+  color: var(--primaer);
+}
+
+.tom-tilstand h2 {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--tekst);
+}
+
+.tom-tilstand p {
+  margin: 0 0 1rem;
+  color: var(--dempet);
+}
+
+/* --- Varsler (alert, virker uten JavaScript) ----------------------------- */
+
+.varsel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--kant);
+  background: var(--kort);
+  font-weight: 500;
+}
+
+.varsel-prikk {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--primaer);
+}
+
+.varsel-suksess {
+  background: var(--gronn-lys);
+  border-color: #bfe9db;
+  color: #0a6b52;
+}
+
+.varsel-suksess .varsel-prikk {
+  background: var(--gronn);
+}
+
+.varsel-feil {
+  background: var(--fare-lys);
+  border-color: #f6c9c9;
+  color: #a52f2f;
+}
+
+.varsel-feil .varsel-prikk {
+  background: var(--fare);
+}
+
+/* --- Toast (brukes av public/js/kontakter.js) ---------------------------- */
+
+.varsel-toast {
+  border: 1px solid #bfe9db;
+  border-radius: var(--radius);
+  box-shadow: var(--skygge-hover);
+  background: var(--kort);
+}
+
+.varsel-toast .toast-body {
+  font-weight: 600;
+  color: #0a6b52;
+  gap: 0.6rem;
+}
+
+.varsel-toast.varsel-feil {
+  border-color: #f6c9c9;
+}
+
+.varsel-toast.varsel-feil .toast-body {
+  color: #a52f2f;
+}
+
+.varsel-toast.varsel-feil .varsel-prikk {
+  background: var(--fare);
+}
+
+/* --- Skjema -------------------------------------------------------------- */
+
+.skjema-kort {
+  padding: 1.4rem;
+}
+
+@media (min-width: 768px) {
+  .skjema-kort {
+    padding: 1.9rem;
+  }
+}
+
+.felt {
+  margin-bottom: 1.15rem;
+}
+
+.felt-etikett {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.pakrevd {
+  color: var(--fare);
+}
+
+.hjelpetekst {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.82rem;
+  color: var(--dempet);
+}
+
+.form-control {
+  border: 1px solid var(--kant);
+  border-radius: var(--radius-liten);
+  padding: 0.6rem 0.75rem;
+  background: #fbfdff;
+  color: var(--tekst);
+}
+
+.form-control:focus {
+  background: var(--kort);
+  border-color: var(--primaer);
+  box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.14);
+}
+
+.form-control.er-feil {
+  border-color: var(--fare);
+  background: #fffafa;
+}
+
+.form-control.er-feil:focus {
+  box-shadow: 0 0 0 3px rgba(224, 86, 86, 0.18);
+}
+
+.felt-feil {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a52f2f;
+}
+
+.skjema-handlinger {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--kant);
+}
+
+.skjema-metadata {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--dempet);
+}
+
+/* --- Modal --------------------------------------------------------------- */
+
+.slett-modal {
+  border: 1px solid var(--kant);
+  border-radius: var(--radius);
+  box-shadow: var(--skygge-hover);
+}
+
+.slett-modal .modal-header,
+.slett-modal .modal-footer {
+  border-color: var(--kant);
+}
+
+.slett-modal .modal-title {
+  color: var(--primaer);
+  font-weight: 700;
+}
+
+/* --- Feilsider ----------------------------------------------------------- */
+
+.melding-kort {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 2.5rem 1.75rem;
+  text-align: center;
+}
+
+.melding-kode {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  background: var(--primaer-lys);
+  color: var(--primaer);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.melding-kort h1 {
+  font-size: 1.6rem;
+  color: var(--primaer);
+}
+
+.melding-kort p {
+  color: var(--dempet);
+}
+
+/* --- Bunntekst ---------------------------------------------------------- */
+
+.bunn {
+  margin-top: 2.5rem;
+  padding-block: 1.5rem;
+  color: var(--dempet);
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* --- Mobil -------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .side-hode {
+    align-items: flex-start;
+  }
+
+  .side-hode .btn-primaer {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tabell thead {
+    display: none; /* på smale skjermer er kolonneoverskriftene mest i veien */
+  }
+
+  .tabell tbody td {
+    display: block;
+    padding: 0.35rem 1rem;
+    border-bottom: none;
+  }
+
+  .tabell tbody tr {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #edf2fb;
+  }
+
+  .celle-handlinger {
+    text-align: left;
+    padding-bottom: 0.25rem;
+  }
+
+  .notat-tekst {
+    max-width: 100%;
+  }
+}
